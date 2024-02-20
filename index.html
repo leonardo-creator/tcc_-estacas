@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensionamento de Estacas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Dimensionamento de Estacas</h1>
+    </header>
+    <main>
+
+        <div class="input-container">
+            <form id="estacasForm">
+                <div class="input-group">
+                    <div>
+                        <label for="tipoEstaca">Tipo de Estaca:</label>
+                        <select name="tipoEstaca" id="tipoEstaca">
+                            <option value="Escavada com lama bentonítica">Escavada com lama bentonítica</option>
+                            <option value="Escavada grande diâmetro">Escavada grande diâmetro</option>
+                            <option value="Escavada pequeno diâmetro">Escavada pequeno diâmetro</option>
+                            <option value="Franki - fuste apiloado">Franki - fuste apiloado</option>
+                            <option value="Franki - fuste vibrado">Franki - fuste vibrado</option>
+                            <option value="Hélice contínua">Hélice contínua</option>
+                            <option value="Metálica">Metálica</option>
+                            <option value="Pré-moldada cravada">Pré-moldada cravada</option>
+                            <option value="Pré-moldada prensada">Pré-moldada prensada</option>
+                            <option value="Raiz">Raiz</option>
+                            <option value="Strauss">Strauss</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="diametro">Diâmetro (cm):</label>
+                        <input type="number" id="diametro" name="diametro">
+                    </div>
+                    <div>
+                        <label for="fck">ƒck do concreto (MPa):</label>
+                        <input type="number" id="fck" name="fck" step="0.01">
+                    </div>
+                    <div>
+                        <label for="coefSeguranca">Coeficiente de Segurança:</label>
+                        <input type="number" id="coefSeguranca" name="coefSeguranca" step="0.01">
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="input-container">
+            <form id="estacasForm">
+                <div id="table-container" class="table-container">
+     
+                    <div class="row header">
+                        <div class="cell">Prof. (m)</div>
+                        <div class="cell">SPT</div>
+                        <div class="cell">Solo</div>
+                        <div class="cell">K (kN/m2)</div>
+                        <div class="cell">qp (kN/m2)</div>
+                        <div class="cell">Qp (kN)</div>
+                        <div class="cell">qs (kN/m2)</div>
+                        <div class="cell">Qs (kN)</div>
+                        <div class="cell">Qtotal (kN)</div>
+                        <div class="cell">Q/CS (kN) Décourt-Quaresma</div>
+
+                        <div class="cell">K (kN/m2) aoki</div>
+                        <div class="cell">α (%)</div>
+                        <div class="cell">Qp (kN)</div>
+                        <div class="cell">Qa (kN)</div>
+                        <div class="cell">Qtotal (kN)</div>
+                        <div class="cell">Q/CS (kN) Aoki-Velloso</div>
+                        
+                    </div>
+                    </div>
+                        <button type="button" id="addRow">Adicionar Linha</button>
+                        <button type="button" id="removeRow" disabled>Remover Linha</button>
+                    <div>
+                    <!-- Linhas dinâmicas serão inseridas aqui -->
+                </div>
+            </form>
+        </div>
+        
+
+
+    </main>
+    <footer>
+        <p>&copy; 2024 Dimensionamento de Estacas</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
