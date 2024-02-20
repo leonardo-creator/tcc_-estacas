@@ -606,3 +606,15 @@ function recalculateAll() {
         row.querySelector('.QCS-value-aoki').textContent = QCSAoki.toFixed(2);
     });
 }
+
+document.getElementById('estacasForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    var diametro = document.getElementById('diametro').value;
+    var fck = document.getElementById('fck').value;
+    var coefSeguranca = document.getElementById('coefSeguranca').value;
+    var resistencia = Math.PI * Math.pow((fck / 200), 2) * diametro * 1000 / coefSeguranca;
+    var divResistencia = document.createElement('div');
+    divResistencia.id = 'resistencia';
+    divResistencia.textContent = 'Resistência da Estaca: ' + resistencia.toFixed(2) + ' kN';
+    document.body.appendChild(divResistencia);
+});
