@@ -26,7 +26,7 @@ main {
 .input-container {
     width: 98%;
     max-width: 98%;
-    margin: auto;
+    margin: 2px;
     background-color: #FFFFFF;
     padding: 20px;
     border-radius: 8px;
@@ -96,6 +96,7 @@ legend {
     padding: 0 5px;
     color: #007BFF;
 }
+
 
 /*-----------------------------------------------------------------------------------
 
@@ -173,4 +174,38 @@ button[disabled] {
 /* Evita que as células do cabeçalho encolham menos que as outras células */
 .header .action-cell {
     flex-shrink: 0;
+}
+
+/*---------------
+
+/* Container for the input fields */
+.inputs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust space between items */
+    padding: 10px;
+    gap: 20px; /* Space between the items */
+    align-items: center;
+
+}
+
+/* Individual input containers */
+.inputs-container > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex: 1; /* Each takes equal width */
+    min-width: 220px; /* Minimum width of each container */
+}
+
+/* Styles for labels and inputs for better appearance */
+.inputs-container label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.inputs-container input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
 }

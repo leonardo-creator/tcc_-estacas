@@ -43,6 +43,10 @@
                         <label for="coefSeguranca">Coeficiente de Segurança:</label>
                         <input type="number" id="coefSeguranca" name="coefSeguranca" step="0.01">
                     </div>
+                    <div>
+                        <label for="cargaPilar">Carga no Pilar (Kn):</label>
+                        <input type="number" id="cargaPilar" name="cargaPilar" step="0.01">
+                    </div>
                 </div>
             </form>
         </div>
@@ -56,7 +60,7 @@
                         <div class="cell">SPT</div>
                         <div class="cell">Solo</div>
                         <div class="cell">K (kN/m2)</div>
-                        <div class="cell">qp (kN/m2)</div>
+                        <div class="cell">Qp (kN/m2)</div>
                         <div class="cell">Qp (kN)</div>
                         <div class="cell">qs (kN/m2)</div>
                         <div class="cell">Qs (kN)</div>
@@ -69,14 +73,39 @@
                         <div class="cell">Qa (kN)</div>
                         <div class="cell">Qtotal (kN)</div>
                         <div class="cell">Q/CS (kN) Aoki-Velloso</div>
+
+                        <div class="cell">Carga de Cálculo (kN)</div>
                         
                     </div>
-                    </div>
-                        <button type="button" id="addRow">Adicionar Linha</button>
-                        <button type="button" id="removeRow" disabled>Remover Linha</button>
-                    <div>
-                    <!-- Linhas dinâmicas serão inseridas aqui -->
+       
                 </div>
+
+                <div class="inputs-container">
+                    <div >
+                        <button type="button" id="addRow">Adicionar Linha</button>
+                    </div>
+
+                    <div>
+                        <label for="resistenciaEstaca">Resistência da Estaca (kN):</label>
+                        <input type="text" id="resistenciaEstaca" name="resistenciaEstaca" readonly>
+                    </div>
+
+                    <div id="maiorCargaCalculo" >
+                        <label for="maiorCargaCalculoValor">Melhor Carga de Cálculo (kN):</label>
+                        <input type="text" id="maiorCargaCalculoValor" readonly>
+                    </div >
+
+                    <div id="profundidadeCorrespondente" >
+                        <label for="profundidadeCorrespondenteValor">Prof. Correspondente (m):</label>
+                        <input type="text" id="profundidadeCorrespondenteValor" readonly>
+                    </div>
+
+                    <div >
+                        <label for="quantidadeEstacas">Quantidade de Estacas:</label>
+                        <input type="text" id="quantidadeEstacas" readonly>
+                    </div>
+                </div>
+
             </form>
         </div>
         

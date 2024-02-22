@@ -531,16 +531,27 @@ function addRowToTable() {
         <div class="cell qa-value-aoki"></div>
         <div class="cell Qtotal-value-aoki"></div>
         <div class="cell QCS-value-aoki"></div>
+
+        <div class="cell carga-calculo-value"></div>
     `;
     tableContainer.appendChild(newRow);
 
     recalculateAll();
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    for (let i = 0; i < 15; i++) {
+        addRowToTable();
+    }
+});
+
 function recalculateAll() {
     const tipoEstaca = document.getElementById('tipoEstaca').value;
     const diametro = parseFloat(document.getElementById('diametro').value) || 0;
     const coefSeguranca = parseFloat(document.getElementById('coefSeguranca').value) || 1;
+
+    let maxCargaCalculo = 0;
+    let rowIndexForMaxCarga = -1;
 
     const rows = document.querySelectorAll('.row:not(.header)');
     rows.forEach((row, index) => {
@@ -604,6 +615,70 @@ function recalculateAll() {
 
         const QCSAoki = QtotalAoki / coefSeguranca;
         row.querySelector('.QCS-value-aoki').textContent = QCSAoki.toFixed(2);
+
+        const cargaCalculo = Math.min(QCSAoki, QCS);
+        const cargaCalculoCell = row.querySelector('.carga-calculo-value');
+
+        if (cargaCalculoCell) { // Se a célula já existir, apenas atualize o valor
+            cargaCalculoCell.textContent = cargaCalculo.toFixed(2);
+        } else { // Se não, crie uma nova célula para "Carga de Cálculo"
+            const newCell = document.createElement('div');
+            newCell.classList.add('cell', 'carga-calculo-value');
+            newCell.textContent = cargaCalculo.toFixed(2);
+            row.appendChild(newCell);
+        }
+
+        if (cargaCalculo > maxCargaCalculo) {
+            maxCargaCalculo = cargaCalculo;
+            rowIndexForMaxCarga = index; // Save the row index of the new maximum
+        }
+
     });
+
+
+    document.getElementById('maiorCargaCalculoValor').value = maxCargaCalculo.toFixed(2);
+
+    document.getElementById('profundidadeCorrespondenteValor').value = rowIndexForMaxCarga + 1;
+
+    const cargaPilar = parseFloat(document.getElementById('cargaPilar').value) || 0;
+    const maiorCargaCalculoValor = parseFloat(document.getElementById('maiorCargaCalculoValor').value) || 0;
+    let quantidadeEstacas = cargaPilar / maiorCargaCalculoValor;
+    quantidadeEstacas = Math.ceil(quantidadeEstacas); // Rounds up to the nearest whole number
+    
+    document.getElementById('quantidadeEstacas').value = quantidadeEstacas;
+
 }
 
+document.getElementById('estacasForm').addEventListener('submit', function(event) {
+    let isFormValid = true;
+
+    // Lista de todos os campos obrigatórios
+    const requiredFields = ['tipoEstaca', 'diametro', 'fck', 'coefSeguranca', 'cargaPilar'];
+
+    requiredFields.forEach(function(fieldId) {
+        const input = document.getElementById(fieldId);
+        if (!input.value) {
+            input.classList.add('input-highlight'); // Adiciona destaque
+            isFormValid = false;
+        } else {
+            input.classList.remove('input-highlight'); // Remove destaque se preenchido
+        }
+    });
+
+    if (!isFormValid) {
+        alert('Por favor, preencha todos os campos destacados.');
+        event.preventDefault(); // Impede o envio do formulário
+    }
+});
+
+function calcularResistenciaEstaca() {
+    const diametro = parseFloat(document.getElementById('diametro').value) || 0;
+    const fck = parseFloat(document.getElementById('fck').value) || 0;
+    const resistencia = Math.PI * Math.pow(diametro / 200, 2) * fck * 1000 / 1.4;
+    document.getElementById('resistenciaEstaca').value = resistencia.toFixed(2);
+}
+
+document.getElementById('diametro').addEventListener('input', calcularResistenciaEstaca);
+document.getElementById('fck').addEventListener('input', calcularResistenciaEstaca);
+
+calcularResistenciaEstaca();
